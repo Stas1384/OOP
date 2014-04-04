@@ -1,0 +1,103 @@
+#include <windows.h>
+#include <conio.h>
+#include <string.h>
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
+ using std::cout;
+ using std::endl;
+ 
+
+ 
+const int LNAME=255;
+ 
+class CTPAHA{
+    char *name;
+    char *form;
+    double square;
+public:
+    CTPAHA();
+    CTPAHA(char*,char*,double);
+    CTPAHA(CTPAHA &c);
+    void Show();
+    ~CTPAHA();
+    void Set(char *n,char *f, double s)//установка полей данных
+                {
+                         name=n;
+                         form=f;
+                         square=s;
+               }
+    
+};
+
+CTPAHA::CTPAHA(){
+        square=1700000;
+        name=new char[255];
+        strcpy(name,"Rosia");
+        form=new char[255];
+        strcpy(form,"Federacia");
+        printf("Imua: %s \n",name);
+        printf("Forma pravlinna: %s \n",form);
+        printf("Ploca: %f \n",square);
+        printf("Konstruktor vizvan bec parametrov\n");
+        printf("--------------------------------------\n");}
+ 
+ 
+CTPAHA::CTPAHA(char* n, char* f, double s){
+        name=new char[strlen(n)+1];
+        strcpy(name,n);
+        form=new char[strlen(f)+1];
+        strcpy(form,f);
+        square=s;
+        printf("Imua: %s \n",name);
+        printf("Forma pravlinna: %s \n",form);
+        printf("Ploca: %f \n",square);
+        printf("Konstruktor vizvan z parametrom\n");
+        printf("--------------------------------------\n");}
+ 
+CTPAHA::CTPAHA(CTPAHA &c){
+        name=new char[strlen(c.name)+1];
+        strcpy(name,c.name);
+        form=new char[strlen(c.form)+1];
+        strcpy(form,c.form);
+        square=c.square;
+        printf("Imua: %s \n",name);
+        printf("Forma pravlinna: %s \n",form);
+        printf("Ploca: %f \n",square);
+        printf("Obekt byv stvoren z konstruktorom kopiryvanna\n");
+        printf("--------------------------------------\n");}
+ 
+void CTPAHA::Show(void){
+        printf("Imua: %s \n",name);
+        printf("Forma pravlinna: %s \n",form);
+        printf("Ploca: %f \n",square);
+        printf("--------------------------------------\n");
+}
+CTPAHA::~CTPAHA(){
+        delete [] name;
+        delete [] form;
+        printf("Vizvan destryktor-danni znuceno\n");
+}
+int main(){
+ SetConsoleCP(1251);
+ SetConsoleOutputCP(1251);
+        setlocale(LC_ALL,"rus_rus.1251");
+        string Name,Form; double Square;
+        CTPAHA C1;
+        CTPAHA C2;
+        C1.Show();
+        C2.Show();
+        cout<<"Vvedit nazvy strany: "<<endl;
+        cin>>Name;
+        cout<<"Vvedit formy pravlinna: "<<endl;
+        cin>>Form;
+        cout<<"Vvedit plocy: "<<endl;
+        cin>>Square;
+        CTPAHA C3((char*)Name.c_str(),(char*)Form.c_str(),Square);
+        C3.Show();
+        _getch();
+        return 0;
+}
+
+
